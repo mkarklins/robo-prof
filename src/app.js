@@ -14,15 +14,24 @@ var ipcRenderer = require("electron").ipcRenderer;
 
 document.addEventListener('DOMContentLoaded', function () {
   sensorChart.buildChart();
-
-  generateStats.sensorArray(sensorChart);
-  generateStats.pidError(sensorChart);
+  // 
+  // generateStats.sensorArray(sensorChart);
+  // generateStats.pidError(sensorChart);
+  // generateStats.pidControlValue(sensorChart);
+  // generateStats.addLeftSpeedValue(sensorChart);
+  // generateStats.addRightSpeedValue(sensorChart);
 
   ipcRenderer.on('updateSensors', function(event , stat){
     if (stat["sensor"]) {
       sensorChart.addSensorArray(stat["sensor"]);
     } else if (stat["pid_error"]) {
       sensorChart.addPidError(stat["pid_error"]);
+    } else if (stat["pid_control_value"]) {
+      sensorChart.addPidControlValue(stat["pid_control_value"]);
+    } else if (stat["left_speed"]) {
+      sensorChart.addLeftSpeedValue(stat["left_speed"]);
+    } else if (stat["right_speed"]) {
+      sensorChart.addRightSpeedValue(stat["right_speed"]);
     };
   });
 });

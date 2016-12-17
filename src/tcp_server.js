@@ -31,7 +31,6 @@ class TcpServer extends EventEmitter {
 
     var stat = {};
     stat["sensors"] = msg;
-
   }
 
   launch() {
