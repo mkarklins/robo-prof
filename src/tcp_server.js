@@ -12,13 +12,16 @@ class TcpServer extends EventEmitter {
 
   // sensor:1111111111,pid_error:0;sensor:1111111111,pid_error:0;
   parseMessage(msg) {
-    console.log(msg);
-
     var self = this;
 
     var messages = msg.split(";");
 
+
     _.each(messages, function(message){
+      if (message.length > 1)
+        console.log(message)
+
+
       var valuePairs = message.split(",");
 
       _.each(valuePairs, function(valuePair){
@@ -60,7 +63,8 @@ class TcpServer extends EventEmitter {
 
     this.server.on('connection', handleConnection);
     var self = this;
-    this.server.listen(1337, "192.168.4.2", function() {
+    // this.server.listen(1337, "192.168.4.2", function() {
+    this.server.listen(1337, "192.168.1.101", function() {
       console.log('server listening to %j', self.server.address());
     });
   }
